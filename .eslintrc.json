@@ -19,11 +19,12 @@
         ],
         "quotes": [
             "error",
-            "single"
+            "single",
+            "backtick"
         ],
         "semi": [
             "error",
-            "always"
+            "never"
         ]
     }
 }
