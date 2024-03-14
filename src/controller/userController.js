@@ -6,8 +6,13 @@ const User = require('../models/User')
 async function registerUser(req, res) {
     const { name, email, password, confirmPassword } = req.body
 
-    if (!name || !email || !password || !confirmPassword) {
-        return res.status(422).json({ msg: 'All fields are required' })
+    var missingFields = []
+    if (!name) missingFields.push('name')
+    if (!email) missingFields.push('email')
+    if (!password) missingFields.push('password')
+    if (!confirmPassword) missingFields.push('confirmPassword')
+    if (missingFields.length > 0) {
+        return res.status(422).json({ msg: `The following fields are required: ${missingFields.join(', ')}` })
     }
     if (password !== confirmPassword) {
         return res.status(422).json({ msg:'Passwords do not match' })

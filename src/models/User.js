@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const User = mongoose.model('User',{
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -17,10 +17,16 @@ const User = mongoose.model('User',{
         required: true,
         trim: true
     },
-    deletedAt:{
+    deletedAt: {
         type: Date,
         default: null
-    }
+    },
+    books: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Book'
+    }]
 })
+
+const User = mongoose.model('User', UserSchema)
 
 module.exports = User
